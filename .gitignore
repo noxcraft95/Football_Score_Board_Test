@@ -1,21 +1,12 @@
 /target/
-# Local Maven repository
-.m2/
 .settings/
-
+deploy.sh
+MANIFEST.MF
 .classpath
-
-# Log files
+.project
+nb-configuration.xml
+nbactions.xml
+/nbproject/
 *.log
-
-# Temporary files
-tmp/
-temp/
-
-# Tomcat output
-logs/
-work/
-temp/
-
-# Maven
-mvn/
+.idea
+*.iml
