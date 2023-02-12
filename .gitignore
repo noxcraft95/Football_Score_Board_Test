@@ -1,0 +1,21 @@
+/target/
+# Local Maven repository
+.m2/
+.settings/
+
+.classpath
+
+# Log files
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# Tomcat output
+logs/
+work/
+temp/
+
+# Maven
+mvn/
