@@ -21,8 +21,9 @@ public class ScoreBoardController {
 	 */
 	@RequestMapping(value = "/")
 	public String index(Model model) {
-		model.addAttribute("message", "Welcome to the football score board");
 	    return "scoreBoardMain";
 	}
+	
+	
 	
 }
