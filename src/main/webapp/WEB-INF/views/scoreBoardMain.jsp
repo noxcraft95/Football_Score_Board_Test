@@ -17,12 +17,15 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
 
-	
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
@@ -37,7 +40,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-	 
+
 
 </head>
 <body>
@@ -49,7 +52,7 @@
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -57,29 +60,51 @@
 						<h5 class="modal-title">New match</h5>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="exampleSelect2">Selecciona una opción:</label> <select
-								class="form-control select2" id="exampleSelect2">
-								<option value="1">España</option>
-								<option value="2">Francia</option>
-								<option value="3">Alemania</option>
-								<option value="4">Inglaterra</option>
-								<option value="5">Portugal</option>
-								<option value="6">Brazil</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<form method="post"
+						action="${pageContext.request.contextPath}/addMatch">
+						<div class="modal-body">
+							<div class="form-group row">
+								<div class="form-group col-md-4" style="text-align: right;">
+									<label for="homeTeamSelect" class="col-form-label w-100">Select
+										home team</label> <select class="form-control select2"
+										id="homeTeamSelect" name="homeTeam">
+										<c:forEach items="${countries}" var="option">
+											<option value="${option}">${option}</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group col-md-3" style="text-align: center;">
+									<label for="groupScoreSelect" class="col-form-label">Score</label>
+									<div class="input-group" id="">
+										<input type="text" readonly="true" 
+											style="min-width: 28px; text-align: center;"
+											class="form-control" name="homeTeamScore" id="homeTeamScoreSelect" value="0" /> <input
+											type="text" readonly="true"
+											style="min-width: 28px; text-align: center;"
+											class="form-control"name="awayTeamScore" id="awayTeamScoreSelect" value="0" />
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="awayTeamSelect" class="col-form-label w-100">Select
+										away team</label> <select name="awayTeam" class="form-control select2"
+										id="awayTeamSelect">
+										<c:forEach items="${countries}" var="option">
+											<option value="${option}">${option}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">End match</button>
+					</form>
 				</div>
 			</div>
-
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
 		</div>
 	</div>
 	</div>
-
 	<div class="container" style="margin-top: 30px;">
 		<h2>Score board summary</h2>
 		<table class="table">
@@ -92,18 +117,15 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${matches}" var="matchSummary">
 				<tr>
-					<td>Real Madrid</td>
-					<td>2</td>
-					<td>1</td>
-					<td>Barcelona</td>
+					<td>${matchSummary.homeTeam}</td>
+					<td>${matchSummary.homeTeamScore}</td>
+					<td>${matchSummary.awayTeamScore}</td>
+					<td>${matchSummary.awayTeam}</td>
 				</tr>
-				<tr>
-					<td>Manchester United</td>
-					<td>0</td>
-					<td>3</td>
-					<td>Liverpool</td>
-				</tr>
+			</c:forEach>
+		
 			</tbody>
 		</table>
 
@@ -111,10 +133,11 @@
 
 </body>
 
-	<script>
-		$(document).ready(function() {
-			console.log($('.select2'));
-			$('.select2').select2();
+<script>
+	$(document).ready(function() {
+		$('.select2').select2({
+			width : '70%',
 		});
-	</script>
+	});
+</script>
 </html>

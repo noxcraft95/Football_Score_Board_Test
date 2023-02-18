@@ -7,6 +7,12 @@ public class MatchComparator implements Comparator<Match> {
 	
     @Override
     public int compare(Match m1, Match m2) {
-        return m1.getTotalScore() - m2.getTotalScore();
+    	  if (m1.getTotalScore() < m2.getTotalScore()) {
+              return 1;
+          } else if (m1.getTotalScore() > m2.getTotalScore()) {
+              return -1;
+          } else {
+              return 0;
+          }
     }
 }
