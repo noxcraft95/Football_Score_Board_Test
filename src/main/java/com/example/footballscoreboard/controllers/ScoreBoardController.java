@@ -10,8 +10,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.footballscoreboard.matches.Match;
 import com.example.footballscoreboard.matches.MatchesManager;
+import com.example.footballscoreboard.utils.CountriesUtils;
 
-import countries.CountriesUtils;
 
 @Controller
 public class ScoreBoardController {

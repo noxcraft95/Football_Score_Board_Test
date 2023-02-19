@@ -1,4 +1,5 @@
-package countries;
+package com.example.footballscoreboard.utils;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
