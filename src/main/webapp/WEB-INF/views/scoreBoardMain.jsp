@@ -45,6 +45,15 @@
 </head>
 <body>
 
+	<c:if test="${not empty successMatch}">
+		<div style="text-align:center" class="alert alert-success alert-dismissible fade show hidden"
+			id="success-alert" role="alert">${successMatch}</div>
+	</c:if>
+	<c:if test="${not empty failMatch}">
+		<div style="text-align:center" class="alert alert-danger alert-dismissible fade show hidden"
+			id="fail-alert" role="alert">${failMatch}</div>
+	</c:if>
+
 	<div class="container">
 		<!-- Trigger the modal with a button -->
 		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
@@ -76,12 +85,13 @@
 								<div class="form-group col-md-3" style="text-align: center;">
 									<label for="groupScoreSelect" class="col-form-label">Score</label>
 									<div class="input-group" id="">
-										<input type="text" readonly="true" 
+										<input type="text" readonly="true"
 											style="min-width: 28px; text-align: center;"
-											class="form-control" name="homeTeamScore" id="homeTeamScoreSelect" value="0" /> <input
-											type="text" readonly="true"
-											style="min-width: 28px; text-align: center;"
-											class="form-control"name="awayTeamScore" id="awayTeamScoreSelect" value="0" />
+											class="form-control" name="homeTeamScore"
+											id="homeTeamScoreSelect" value="0" /> <input type="text"
+											readonly="true" style="min-width: 28px; text-align: center;"
+											class="form-control" name="awayTeamScore"
+											id="awayTeamScoreSelect" value="0" />
 									</div>
 								</div>
 								<div class="form-group col-md-4">
@@ -107,7 +117,7 @@
 	</div>
 	<div class="container" style="margin-top: 30px;">
 		<h2>Score board summary</h2>
-		<table class="table">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Home team</th>
@@ -117,15 +127,15 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${matches}" var="matchSummary">
-				<tr>
-					<td>${matchSummary.homeTeam}</td>
-					<td>${matchSummary.homeTeamScore}</td>
-					<td>${matchSummary.awayTeamScore}</td>
-					<td>${matchSummary.awayTeam}</td>
-				</tr>
-			</c:forEach>
-		
+				<c:forEach items="${matches}" var="matchSummary">
+					<tr>
+						<td>${matchSummary.homeTeam}</td>
+						<td>${matchSummary.homeTeamScore}</td>
+						<td>${matchSummary.awayTeamScore}</td>
+						<td>${matchSummary.awayTeam}</td>
+					</tr>
+				</c:forEach>
+
 			</tbody>
 		</table>
 
@@ -138,6 +148,30 @@
 		$('.select2').select2({
 			width : '70%',
 		});
+
+		// Show alert if exist
+		if ($("#success-alert").length > 0) {
+			
+			$("#success-alert").removeClass("hidden");
+			$("#success-alert").addClass("show-alert");
+			//Hide in 5 seconds
+			$("#success-alert").delay(5000).fadeOut(500, function() {
+				$(this).removeClass("show-alert");
+				$(this).addClass("hidden");
+			});
+		}
+		
+		// Show alert if exist
+		if ($("#fail-alert").length > 0) {
+			
+			$("#fail-alert").removeClass("hidden");
+			$("#fail-alert").addClass("show-alert");
+			//Hide in 5 seconds
+			$("#fail-alert").delay(5000).fadeOut(500, function() {
+				$(this).removeClass("show-alert");
+				$(this).addClass("hidden");
+			});
+		}
 	});
 </script>
 </html>
